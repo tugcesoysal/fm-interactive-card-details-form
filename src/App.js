@@ -1,24 +1,49 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import { useState } from "react";
+import Card from "./Components/Card";
+import Form from "./Components/Form";
+import ThankYou from "./Components/ThankYou";
 
 function App() {
+  const [cardNumberValue, setCardNumberValue] = useState("");
+  const [dateMM, setDateMM] = useState("");
+  const [dateYY, setDateYY] = useState("");
+  const [cvcValue, setCVCValue] = useState("");
+  const [nameValue, setNameValue] = useState("");
+
+  const [isFormSubmitted, setIsFormSubmitted] = useState(false);
+
+  const handleFormSubmit = () => {
+    setIsFormSubmitted(true);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Card
+        cardNumberValue={cardNumberValue}
+        dateMM={dateMM}
+        dateYY={dateYY}
+        cvcValue={cvcValue}
+        nameValue={nameValue}
+      />
+      {isFormSubmitted ? (
+        <ThankYou />
+      ) : (
+        <Form
+          onSubmit={handleFormSubmit}
+          cardNumberValue={cardNumberValue}
+          setCardNumberValue={setCardNumberValue}
+          dateMM={dateMM}
+          setDateMM={setDateMM}
+          dateYY={dateYY}
+          setDateYY={setDateYY}
+          cvcValue={cvcValue}
+          setCVCValue={setCVCValue}
+          nameValue={nameValue}
+          setNameValue={setNameValue}
+        />
+      )}
+    </>
   );
 }
 
